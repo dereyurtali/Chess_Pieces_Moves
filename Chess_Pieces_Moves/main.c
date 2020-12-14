@@ -2,7 +2,9 @@
 #include "ChessLib.h"
 
 int main() {
-    createChessTable();
+    int **board = createChessTable();
+    printChessTable(board);
+    
     
     return 0;
 }

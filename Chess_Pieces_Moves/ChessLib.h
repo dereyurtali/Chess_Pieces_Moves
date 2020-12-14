@@ -6,3 +6,5 @@
 #endif /* ChessLib_h */
 
 int **createChessTable(void);
+
+void printChessTable(int **);
