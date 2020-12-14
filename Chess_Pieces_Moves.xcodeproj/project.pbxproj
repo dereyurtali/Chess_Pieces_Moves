@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C03D83B625803635005E526E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = C03D83B525803635005E526E /* main.c */; };
+		C03D83BF258037B3005E526E /* ChessLib.c in Sources */ = {isa = PBXBuildFile; fileRef = C03D83BE258037B3005E526E /* ChessLib.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		C03D83B225803635005E526E /* Chess_Pieces_Moves */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess_Pieces_Moves; sourceTree = BUILT_PRODUCTS_DIR; };
 		C03D83B525803635005E526E /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		C03D83BD258037B3005E526E /* ChessLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessLib.h; sourceTree = "<group>"; };
+		C03D83BE258037B3005E526E /* ChessLib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ChessLib.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				C03D83B525803635005E526E /* main.c */,
+				C03D83BD258037B3005E526E /* ChessLib.h */,
+				C03D83BE258037B3005E526E /* ChessLib.c */,
 			);
 			path = Chess_Pieces_Moves;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C03D83BF258037B3005E526E /* ChessLib.c in Sources */,
 				C03D83B625803635005E526E /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
