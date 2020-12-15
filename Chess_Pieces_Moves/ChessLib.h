@@ -5,7 +5,10 @@
 
 #endif /* ChessLib_h */
 
-struct Poz{};
+struct Poz{
+    short yatay;
+    char dusey;
+};
 
 int **createChessTable(void);
 

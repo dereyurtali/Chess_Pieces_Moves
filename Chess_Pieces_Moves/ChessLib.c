@@ -4,11 +4,11 @@
 
 
 
-struct Poz{
+/*struct Poz{
     short yatay;
     char dusey;
 };
-
+*/
 
 
 int **createChessTable(){
