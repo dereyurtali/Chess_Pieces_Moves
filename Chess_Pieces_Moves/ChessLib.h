@@ -19,12 +19,12 @@ void printChessTable(int **);
 struct Poz *hareketSah(struct Poz);
 
 struct Poz *hareketPiyon(struct Poz);
+
+struct Poz *hareketKale(struct Poz);
 /*
 struct Poz *hareketFil(struct Poz);
 
 struct Poz *hareketAt(struct Poz);
-
-struct Poz *hareketKale(struct Poz);
 
 struct Poz *hareketVezir(struct Poz);
 

@@ -51,13 +51,13 @@ struct Poz *hareketSah(struct Poz old){
     // this func. return an array of possible positions.
     int i, j, k=0;
     struct Poz *possiblePositions = (struct Poz *)calloc(8, sizeof(struct Poz));
-    struct Poz p1;
+    struct Poz new;
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             if( !((j==1) && (i==1)) ){
-                p1.dusey = old.dusey+(i-1);
-                p1.yatay = old.yatay+(j-1);
-                possiblePositions[k] = p1;
+                new.dusey = old.dusey+(i-1);
+                new.yatay = old.yatay+(j-1);
+                possiblePositions[k] = new;
                 k++;
             }
         }
@@ -70,22 +70,39 @@ struct Poz *hareketPiyon(struct Poz old){
     // return arr. can have one value or two. depends on the first position.
     int i;
     struct Poz *possiblePositions;
-    struct Poz p1;
+    struct Poz new;
     if(old.dusey == 2){
         struct Poz *foo = (struct Poz *)calloc(2, sizeof(struct Poz));
         for (i = 0; i < 2; i++) {
-            p1.dusey = old.dusey + (i+1);
-            p1.yatay = old.yatay;
-            foo[i] = p1;
+            new.dusey = old.dusey + (i+1);
+            new.yatay = old.yatay;
+            foo[i] = new;
         }
         possiblePositions = foo;
     }else{
             struct Poz *foo = (struct Poz *)calloc(1, sizeof(struct Poz));
-            p1.dusey = old.dusey + 1;
-            p1.yatay = old.yatay;
-            foo[0] = p1;
+            new.dusey = old.dusey + 1;
+            new.yatay = old.yatay;
+            foo[0] = new;
             possiblePositions = foo;
     }
     return possiblePositions;
 }
 
+struct Poz *hareketKale(struct Poz old){
+    // this func. return an array of possible positions.
+    int i, j, k=0;
+    struct Poz *possiblePositions = (struct Poz *)calloc(14, sizeof(struct Poz));
+    struct Poz new;
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if (old.dusey == (j+1) || old.yatay == (i+'a')) {
+                new.dusey = (j+1);
+                new.yatay = i+'a';
+                possiblePositions[k] = new;
+                k++;
+            }
+        }
+    }
+    return possiblePositions;
+}

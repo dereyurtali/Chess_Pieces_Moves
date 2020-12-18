@@ -7,8 +7,8 @@ int main() {
     printChessTable(board);
     
     struct Poz fav;
-    fav.dusey = 2;
-    fav.yatay = 'd';
+    fav.dusey = 4;
+    fav.yatay = 'e';
     //char tas = 's';
     
     
@@ -29,6 +29,13 @@ int main() {
     
     printf("\n\n--------------------\n\n");
     
+    possiblePositions = hareketKale(fav);
+    for (i = 0; i < 15; i++) {
+        printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].yatay,possiblePositions[i].dusey);
+        //printf("the arr. of pos. pos. has just 1 value");
+    }
+    
+    printf("\n\n--------------------\n\n");
     
     
     
