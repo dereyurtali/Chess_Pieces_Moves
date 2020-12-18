@@ -106,3 +106,26 @@ struct Poz *hareketKale(struct Poz old){
     }
     return possiblePositions;
 }
+
+struct Poz *hareketFil(struct Poz old){
+    // this func. return an array of possible positions.
+    int i, j = 0, k=0;
+    struct Poz *possiblePositions = (struct Poz *)calloc(16, sizeof(struct Poz));
+    struct Poz new;
+    for (i = 0; i < 8; i++) {
+        new.yatay = i+'a';
+        k = new.yatay - old.yatay;
+        new.dusey = old.dusey + k;
+        if (new.dusey > 0){
+            possiblePositions[j] = new;
+            j++;
+        }
+        new.dusey = old.dusey - k;
+        if (new.dusey > 0){
+            possiblePositions[j] = new;
+            j++;
+        }
+    }
+    // this func. made with kan, ter, gozyasi.
+    return possiblePositions;
+}
