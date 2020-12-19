@@ -55,8 +55,8 @@ struct Poz *hareketSah(struct Poz old){
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             if( !((j==1) && (i==1)) ){
-                new.dusey = old.dusey+(i-1);
-                new.yatay = old.yatay+(j-1);
+                new.yatay = old.yatay+(i-1);
+                new.dusey = old.dusey+(j-1);
                 possiblePositions[k] = new;
                 k++;
             }
@@ -71,18 +71,18 @@ struct Poz *hareketPiyon(struct Poz old){
     int i;
     struct Poz *possiblePositions;
     struct Poz new;
-    if(old.dusey == 2){
+    if(old.yatay == 2){
         struct Poz *foo = (struct Poz *)calloc(2, sizeof(struct Poz));
         for (i = 0; i < 2; i++) {
-            new.dusey = old.dusey + (i+1);
-            new.yatay = old.yatay;
+            new.yatay = old.yatay + (i+1);
+            new.dusey = old.dusey;
             foo[i] = new;
         }
         possiblePositions = foo;
     }else{
             struct Poz *foo = (struct Poz *)calloc(1, sizeof(struct Poz));
-            new.dusey = old.dusey + 1;
-            new.yatay = old.yatay;
+            new.yatay = old.yatay + 1;
+            new.dusey = old.dusey;
             foo[0] = new;
             possiblePositions = foo;
     }
@@ -96,9 +96,9 @@ struct Poz *hareketKale(struct Poz old){
     struct Poz new;
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if (old.dusey == (j+1) || old.yatay == (i+'a')) {
-                new.dusey = (j+1);
-                new.yatay = i+'a';
+            if (old.yatay == (j+1) || old.dusey == (i+'a')) {
+                new.yatay = (j+1);
+                new.dusey = i+'a';
                 possiblePositions[k] = new;
                 k++;
             }
@@ -113,15 +113,15 @@ struct Poz *hareketFil(struct Poz old){
     struct Poz *possiblePositions = (struct Poz *)calloc(16, sizeof(struct Poz));
     struct Poz new;
     for (i = 0; i < 8; i++) {
-        new.yatay = i+'a';
-        k = new.yatay - old.yatay;
-        new.dusey = old.dusey + k;
-        if (new.dusey > 0){
+        new.dusey = i+'a';
+        k = new.dusey - old.dusey;
+        new.yatay = old.yatay + k;
+        if (new.yatay > 0){
             possiblePositions[j] = new;
             j++;
         }
-        new.dusey = old.dusey - k;
-        if (new.dusey > 0){
+        new.yatay = old.yatay - k;
+        if (new.yatay > 0){
             possiblePositions[j] = new;
             j++;
         }
@@ -131,16 +131,17 @@ struct Poz *hareketFil(struct Poz old){
 }
 
 struct Poz *hareketVezir(struct Poz old){
+    // this func. return an array of possible positions.
     int i, j, k=0;
     struct Poz *possiblePositions = (struct Poz *)calloc(27, sizeof(struct Poz));
     struct Poz new;
     // plus code.
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            if (old.dusey == (j+1) || old.yatay == (i+'a')) {
-                new.dusey = (j+1);
-                new.yatay = i+'a';
-                if(!((old.yatay == new.yatay) && (old.dusey == new.dusey))){ // it was showing the old position as possible position before this if.
+            if (old.yatay == (j+1) || old.dusey == (i+'a')) {
+                new.yatay = (j+1);
+                new.dusey = i+'a';
+                if(!((old.dusey == new.dusey) && (old.yatay == new.yatay))){ // it was showing the old position as possible position before this if.
                     possiblePositions[k] = new;
                     k++;
                 }
@@ -149,18 +150,18 @@ struct Poz *hareketVezir(struct Poz old){
     }j = 0;
     // cross code.
     for (i = 0; i < 8; i++) {
-        new.yatay = i+'a';
-        j = new.yatay - old.yatay;
-        new.dusey = old.dusey + j;
-        if (new.dusey > 0){
-            if(old.yatay != new.yatay && old.dusey != new.dusey){
+        new.dusey = i+'a';
+        j = new.dusey - old.dusey;
+        new.yatay = old.yatay + j;
+        if (new.yatay > 0){
+            if(old.dusey != new.dusey && old.yatay != new.yatay){
                 possiblePositions[k] = new;
                 k++;
             }
         }
-        new.dusey = old.dusey - j;
-        if (new.dusey > 0){
-            if(old.yatay != new.yatay && old.dusey != new.dusey){
+        new.yatay = old.yatay - j;
+        if (new.yatay > 0){
+            if(old.dusey != new.dusey && old.yatay != new.yatay){
                 possiblePositions[k] = new;
                 k++;
             }
@@ -170,7 +171,21 @@ struct Poz *hareketVezir(struct Poz old){
 }
 
 struct Poz *hareketAt(struct Poz old){
+    // this func. return an array of possible positions.
+    // max. 8 possible moves.
+    int i, j, k = 0, l = 0;
     struct Poz *possiblePositions;
-    possiblePositions = (struct Poz *)calloc(0, sizeof(struct Poz));
+    //struct Poz new;
+    possiblePositions = (struct Poz *)calloc(8, sizeof(struct Poz));
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            k = (j+'a') - old.yatay; // k -> yatay farki
+            //l = old.
+            if (k == 1 || k == -1) {
+                printf("");
+            }
+        }
+    }
+    printf("at l = %d",l);
     return possiblePositions;
 }
