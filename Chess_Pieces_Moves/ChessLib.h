@@ -14,7 +14,7 @@ int **createChessTable(void);
 
 void printChessTable(int **);
 
-//void hareketYazdir(char, struct Poz);
+void hareketYazdir(char, struct Poz);
 
 struct Poz *hareketSah(struct Poz);
 

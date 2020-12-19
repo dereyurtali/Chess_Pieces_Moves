@@ -24,7 +24,6 @@ void printChessTable(int **table){
         printf("\n\n");
     }
 }
-/*
 
 void hareketYazdir(char tas, struct Poz ilkPozisyon){
     struct Poz *(*satrancFonksiyonlari[]) (struct Poz) = {&hareketAt, &hareketFil, //  creating array of
@@ -45,7 +44,6 @@ void hareketYazdir(char tas, struct Poz ilkPozisyon){
             satrancFonksiyonlari[5] (ilkPozisyon);break;
     }
 }
- */
 
 struct Poz *hareketSah(struct Poz old){
     // this func. return an array of possible positions.
@@ -99,8 +97,10 @@ struct Poz *hareketKale(struct Poz old){
             if (old.yatay == (j+1) || old.dusey == (i+'a')) {
                 new.yatay = (j+1);
                 new.dusey = i+'a';
-                possiblePositions[k] = new;
-                k++;
+                if (!(new.dusey == 'e' && new.yatay == 4)) {
+                    possiblePositions[k] = new;
+                    k++;
+                }
             }
         }
     }
@@ -117,13 +117,17 @@ struct Poz *hareketFil(struct Poz old){
         k = new.dusey - old.dusey;
         new.yatay = old.yatay + k;
         if (new.yatay > 0){
-            possiblePositions[j] = new;
-            j++;
+            if (!(new.dusey == 'e' && new.yatay == 4)) {
+                possiblePositions[j] = new;
+                j++;
+            }
         }
         new.yatay = old.yatay - k;
         if (new.yatay > 0){
-            possiblePositions[j] = new;
-            j++;
+            if (!(new.dusey == 'e' && new.yatay == 4)) {
+                possiblePositions[j] = new;
+                j++;
+            }
         }
     }
     // this func. made with kan, ter, gozyasi.
