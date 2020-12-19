@@ -2,18 +2,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int **createChessTable(){
-    int i, j;
-    int **table = (int **)calloc(8, sizeof(int *));
+int **generateChessTable(struct Poz position, struct Poz *possiblePositions){ // this func. will take possible positions and generate matrix.
+                                                                   // empty positions will be filled with 0 's.
+                                                                   // possible moves will be 1 's. tas will be 2.
+    int i, j, k=0;
+    int **printableArray = (int **)calloc(8, sizeof(int *));
     for (i = 0; i < 8; i++) {
-        table[i] = (int *)calloc(sizeof(int), 8);
+        printableArray[i] = (int *)calloc(8, sizeof(int));
     }
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            table[i][j] = 0;
+            while (possiblePositions[k].dusey != 0) {
+                if (possiblePositions[k].yatay == (8-i) && possiblePositions[k].dusey == j+'a'){
+                    printableArray[i][j] = 1;
+                }
+            }
+            if (position.yatay == (8-i) && position.dusey == j + 'a') {
+                printableArray[i][j] = 2;
+            }else{
+                printableArray[i][j] = 0;
+            }
         }
-    }return table;
+    }
+    return printableArray;
 }
+
 
 void printChessTable(int **table){
     int i, j;
@@ -29,20 +42,22 @@ void hareketYazdir(char tas, struct Poz ilkPozisyon){
     struct Poz *(*satrancFonksiyonlari[]) (struct Poz) = {&hareketAt, &hareketFil, //  creating array of
                                                           &hareketSah, &hareketKale,// func. pointer
                                                           &hareketPiyon, &hareketVezir};
+    struct Poz *output;
     switch (tas){
         case 'a':
-            satrancFonksiyonlari[0] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[0] (ilkPozisyon);break;
         case 'f':
-            satrancFonksiyonlari[1] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[1] (ilkPozisyon);break;
         case 's':
-            satrancFonksiyonlari[2] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[2] (ilkPozisyon);break;
         case 'k':
-            satrancFonksiyonlari[3] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[3] (ilkPozisyon);break;
         case 'p':
-            satrancFonksiyonlari[4] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[4] (ilkPozisyon);break;
         case 'v':
-            satrancFonksiyonlari[5] (ilkPozisyon);break;
+            output = satrancFonksiyonlari[5] (ilkPozisyon);break;
     }
+    generateChessTable(ilkPozisyon, output);
 }
 
 struct Poz *hareketSah(struct Poz old){
@@ -55,8 +70,7 @@ struct Poz *hareketSah(struct Poz old){
             if( !((j==1) && (i==1)) ){
                 new.yatay = old.yatay+(i-1);
                 new.dusey = old.dusey+(j-1);
-                possiblePositions[k] = new;
-                k++;
+                possiblePositions[k++] = new;
             }
         }
     }
@@ -98,8 +112,7 @@ struct Poz *hareketKale(struct Poz old){
                 new.yatay = (j+1);
                 new.dusey = i+'a';
                 if (!(new.dusey == 'e' && new.yatay == 4)) {
-                    possiblePositions[k] = new;
-                    k++;
+                    possiblePositions[k++] = new;
                 }
             }
         }
@@ -118,15 +131,13 @@ struct Poz *hareketFil(struct Poz old){
         new.yatay = old.yatay + k;
         if (new.yatay > 0){
             if (!(new.dusey == 'e' && new.yatay == 4)) {
-                possiblePositions[j] = new;
-                j++;
+                possiblePositions[j++] = new;
             }
         }
         new.yatay = old.yatay - k;
         if (new.yatay > 0){
             if (!(new.dusey == 'e' && new.yatay == 4)) {
-                possiblePositions[j] = new;
-                j++;
+                possiblePositions[j++] = new;
             }
         }
     }
@@ -146,8 +157,7 @@ struct Poz *hareketVezir(struct Poz old){
                 new.yatay = (j+1);
                 new.dusey = i+'a';
                 if(!((old.dusey == new.dusey) && (old.yatay == new.yatay))){ // it was showing the old position as possible position before this if.
-                    possiblePositions[k] = new;
-                    k++;
+                    possiblePositions[k++] = new;
                 }
             }
         }
@@ -159,15 +169,13 @@ struct Poz *hareketVezir(struct Poz old){
         new.yatay = old.yatay + j;
         if (new.yatay > 0){
             if(old.dusey != new.dusey && old.yatay != new.yatay){
-                possiblePositions[k] = new;
-                k++;
+                possiblePositions[k++] = new;
             }
         }
         new.yatay = old.yatay - j;
         if (new.yatay > 0){
             if(old.dusey != new.dusey && old.yatay != new.yatay){
-                possiblePositions[k] = new;
-                k++;
+                possiblePositions[k++] = new;
             }
         }
     }

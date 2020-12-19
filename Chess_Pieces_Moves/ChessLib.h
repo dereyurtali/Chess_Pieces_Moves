@@ -10,9 +10,9 @@ struct Poz{
     char dusey;
 };
 
-int **createChessTable(void);
-
 void printChessTable(int **);
+
+int **generateChessTable(struct Poz, struct Poz *);
 
 void hareketYazdir(char, struct Poz);
 
