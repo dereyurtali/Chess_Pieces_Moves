@@ -129,3 +129,15 @@ struct Poz *hareketFil(struct Poz old){
     // this func. made with kan, ter, gozyasi.
     return possiblePositions;
 }
+
+struct Poz *hareketVezir(struct Poz old){
+    int i, j = 0, k=0;
+    struct Poz *possiblePositions = (struct Poz *)calloc(16, sizeof(struct Poz));
+    struct Poz new;
+    
+    
+    
+    
+    
+    return possiblePositions;
+}
