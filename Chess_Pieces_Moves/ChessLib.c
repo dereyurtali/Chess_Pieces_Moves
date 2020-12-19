@@ -173,19 +173,25 @@ struct Poz *hareketVezir(struct Poz old){
 struct Poz *hareketAt(struct Poz old){
     // this func. return an array of possible positions.
     // max. 8 possible moves.
-    int i, j, k = 0, l = 0;
+    int i, j, k = 0, l = 0, m = 0;
     struct Poz *possiblePositions;
-    //struct Poz new;
+    struct Poz new;
     possiblePositions = (struct Poz *)calloc(8, sizeof(struct Poz));
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            k = (j+'a') - old.yatay; // k -> yatay farki
-            //l = old.
-            if (k == 1 || k == -1) {
-                printf("");
+            k = (j+'a') - old.dusey; // k -> yatay farki
+            l = (8-(i+1)) - old.yatay; // l -> dusey farki
+            if ((k == 1 || k == -1) && (l == 2 || l == -2)) { // yataydaki fark 1 ise ve duseydeki fark 2 ise
+                new.yatay = i+1;
+                new.dusey = j+'a';
+                possiblePositions[m++] = new;
+            }
+            if ((k == 2 || k == -2) && (l == 1 || l == -1)) { // yataydaki fark 2 ise ve duseydeki fark 1 ise
+                new.yatay = i+1;
+                new.dusey = j+'a';
+                possiblePositions[m++] = new;
             }
         }
     }
-    printf("at l = %d",l);
     return possiblePositions;
 }

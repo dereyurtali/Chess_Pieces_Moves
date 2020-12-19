@@ -13,7 +13,7 @@ int main() {
     
     
     struct Poz *possiblePositions = hareketSah(fav);
-    
+    /*
     for (i = 0; i < 8; i++) {
         printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].dusey,possiblePositions[i].yatay);
     }
@@ -51,17 +51,16 @@ int main() {
      printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].dusey,possiblePositions[i].yatay);
         //printf("the arr. of pos. pos. has just 1 value");
     }
-    /*
-
+    
+*/
     
     printf("\n\n--------------------\n\n");
     
     possiblePositions = hareketAt(fav);
-    
-    for (i = 0; i < 64; i++) {
+   
+    for (i = 0; i < 8; i++) {
      printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].dusey,possiblePositions[i].yatay);
-        //printf("the arr. of pos. pos. has just 1 value");
     }
-    */
+    
     return 0;
 }
