@@ -131,13 +131,46 @@ struct Poz *hareketFil(struct Poz old){
 }
 
 struct Poz *hareketVezir(struct Poz old){
-    int i, j = 0, k=0;
-    struct Poz *possiblePositions = (struct Poz *)calloc(16, sizeof(struct Poz));
+    int i, j, k=0;
+    struct Poz *possiblePositions = (struct Poz *)calloc(27, sizeof(struct Poz));
     struct Poz new;
-    
-    
-    
-    
-    
+    // plus code.
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            if (old.dusey == (j+1) || old.yatay == (i+'a')) {
+                new.dusey = (j+1);
+                new.yatay = i+'a';
+                if(!((old.yatay == new.yatay) && (old.dusey == new.dusey))){ // it was showing the old position as possible position before this if.
+                    possiblePositions[k] = new;
+                    k++;
+                }
+            }
+        }
+    }j = 0;
+    // cross code.
+    for (i = 0; i < 8; i++) {
+        new.yatay = i+'a';
+        j = new.yatay - old.yatay;
+        new.dusey = old.dusey + j;
+        if (new.dusey > 0){
+            if(old.yatay != new.yatay && old.dusey != new.dusey){
+                possiblePositions[k] = new;
+                k++;
+            }
+        }
+        new.dusey = old.dusey - j;
+        if (new.dusey > 0){
+            if(old.yatay != new.yatay && old.dusey != new.dusey){
+                possiblePositions[k] = new;
+                k++;
+            }
+        }
+    }
+    return possiblePositions;
+}
+
+struct Poz *hareketAt(struct Poz old){
+    struct Poz *possiblePositions;
+    possiblePositions = (struct Poz *)calloc(0, sizeof(struct Poz));
     return possiblePositions;
 }

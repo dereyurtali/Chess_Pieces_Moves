@@ -35,11 +35,19 @@ int main() {
         printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].yatay,possiblePositions[i].dusey);
         //printf("the arr. of pos. pos. has just 1 value");
     }
-    */
+    
     printf("\n\n--------------------\n\n");
     
     possiblePositions = hareketFil(fav);
     for (i = 0; i < 15; i++) {
+        printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].yatay,possiblePositions[i].dusey);
+        //printf("the arr. of pos. pos. has just 1 value");
+    }
+     */
+    printf("\n\n--------------------\n\n");
+    
+    possiblePositions = hareketVezir(fav);
+    for (i = 0; i < 27; i++) {
         printf("possible pos. number %d : %c %d\n",i+1,possiblePositions[i].yatay,possiblePositions[i].dusey);
         //printf("the arr. of pos. pos. has just 1 value");
     }

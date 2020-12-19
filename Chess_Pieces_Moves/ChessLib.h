@@ -25,6 +25,7 @@ struct Poz *hareketKale(struct Poz);
 struct Poz *hareketFil(struct Poz);
 
 struct Poz *hareketVezir(struct Poz);
-/*
+
 struct Poz *hareketAt(struct Poz);
-*/
+
+	
