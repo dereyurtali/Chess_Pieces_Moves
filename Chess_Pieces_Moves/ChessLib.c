@@ -12,16 +12,18 @@ int **generateChessTable(struct Poz position, struct Poz *possiblePositions){ //
     }
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
-            while (possiblePositions[k].dusey != 0) {
-                if (possiblePositions[k].yatay == (8-i) && possiblePositions[k].dusey == j+'a'){
-                    printableArray[i][j] = 1;
-                }
-            }
             if (position.yatay == (8-i) && position.dusey == j + 'a') {
                 printableArray[i][j] = 2;
             }else{
                 printableArray[i][j] = 0;
             }
+            while (possiblePositions[k].dusey != 0) { // i = 3, j = 4
+                if ((possiblePositions[k].yatay == (8-i)) && (possiblePositions[k].dusey == j+'a')){
+                    printableArray[i][j] = 1;
+                }
+                k++;
+            }
+            k=0;
         }
     }
     return printableArray;
@@ -43,6 +45,7 @@ void hareketYazdir(char tas, struct Poz ilkPozisyon){
                                                           &hareketSah, &hareketKale,// func. pointer
                                                           &hareketPiyon, &hareketVezir};
     struct Poz *output;
+    int **output2;
     switch (tas){
         case 'a':
             output = satrancFonksiyonlari[0] (ilkPozisyon);break;
@@ -57,7 +60,8 @@ void hareketYazdir(char tas, struct Poz ilkPozisyon){
         case 'v':
             output = satrancFonksiyonlari[5] (ilkPozisyon);break;
     }
-    generateChessTable(ilkPozisyon, output);
+    output2 = generateChessTable(ilkPozisyon, output);
+    printChessTable(output2);
 }
 
 struct Poz *hareketSah(struct Poz old){
